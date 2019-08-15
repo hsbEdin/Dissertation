@@ -1,0 +1,54 @@
+引入两个Ontology,一个跟autism相关，一个不相关，看他们对word2vec(Autism)的提升
+word2vec有时会输出多于NCBO的phenotype，找出原因
+测试Ontology中class树关系在word2vec中的表现
+word2vec中还有一些简单的规则要写(整个文本的输入，提取相似度阈值以上的表型等等)
+1.improve gensim
+2.Parse two ontologies:Ashma, dyslexia
+3.evalution
+
+输出要不要包含位置 还是没讲清楚
+可不可以写一些简单规则，像是做个字典存表型
+提取表型和同义词
+
+
+我们加入了两个新的疾病的数据集来提升模型
+还引用了rule based method 来得到所有表型
+Just made a synonym and phenotype dictionary
+
+
+
+1.
+Different parameters of the word2vec model(window size, negative sample and so on)
+2.
+the improvement of word2vec using new ontologies that are close to autism
+the improvement of word2vec using new ontologies that are not close to autism
+3.
+the relationship between phenotypes in the vector space
+according to
+the relationship between phenotypes in the ontology tree
+Using cluster do some visualization
+
+
+会收到邮件，关于gold standard
+举例：asd - Autistic_behavior_HP, Atrial_septal_defect_HP
+asd被匹配成了两个Phenotype,但其实在一些文章中，根据上下文，它只有一个意思，我们应该看它在test abstract中的意思，来测试（更好的Word embeddings）
+不同的trainging dataset对Word2vec有影响， 我们应该看相同的词在不同数据集里面被分配成了什么词
+
+论文可以开始写了 然后share to Ian
+
+Problem: 同一个词的所有phenotype都被NCBO标注出来，我们的training dataset是基于这些pheotype,同一个词的不同phenotype的句子会有相同的数量，
+所以很难根据上下文来寻找不同的word embedding
+Unless we train our model using the better training set
+
+构建training dataset 选择性看abtract如果关于autism，就只保留autism的Phenotype
+
+
+
+Experiment:
+1. Different parameters on one dataset(autism), evaluated by the gold standard, then pick the best parameters.
+2. Applying the parameters to different dataset(autism, dysiexia, asthma and mixed), pick the best datasets.
+ (In this step, we can look at the influence of different disease dataset on the autism dataset)
+3. Evaluating the model using the dataset in 2 with ncbo, gold standard, and test ncbo on gold standard(make a comparison)
+4. Compare vectors of phenotypes in the figure below: (These vectors are build by our dataset, by comparing the vectors
+of them, we can find the relationship between this words in the dataset. We can compare the difference between this relationship
+and the relationship in the figure.)
